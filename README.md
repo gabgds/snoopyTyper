@@ -1,25 +1,52 @@
-# 🐾 Snoopy Typer
+🐾 Snoopy Typer
 
-Uma extensão para o Visual Studio Code criada para fins de estudo, que adiciona um companheiro de codificação (Snoopy) que reage à sua digitação em tempo real.
+Uma extensão interativa para o Visual Studio Code que adiciona o Snoopy como seu companheiro de codificação, reagindo às suas ações em tempo real.
+✨ Novas Funcionalidades
 
-## 🚀 Funcionalidades
-- **Companheiro Dinâmico:** O Snoopy fica na barra lateral (Explorer) observando seu trabalho.
-- **Animação Reativa:** Quando você começa a digitar, o Snoopy acorda e começa a usar sua máquina de escrever.
-- **Sincronia de Animação:** O Snoopy termina o ciclo da animação antes de voltar a dormir, garantindo uma transição suave.
-- **Interface Responsiva:** O conteúdo se ajusta automaticamente ao redimensionar a barra lateral.
+    Onipresente: Agora o Snoopy te acompanha tanto na aba de Arquivos (Explorer) quanto na aba do Git (Source Control).
 
-## 🛠️ Tecnologias e Conceitos Utilizados
-- **JavaScript (Node.js):** Lógica principal da extensão.
-- **VS Code API:** - `WebviewViewProvider` para criar a interface customizada.
-  - `workspace.onDidChangeTextDocument` para detectar a digitação.
-  - Mensageria (`postMessage`) para comunicação entre a extensão e o HTML.
-- **Frontend (HTML5/CSS3):** Criação da interface e estilização responsiva.
-- **Scripts de Animação:** Uso de `setTimeout` e `clearTimeout` para controle de estado dos GIFs.
+    Animação de Digitação: Ele acorda e usa a máquina de escrever sempre que você digita no editor.
 
-## 📖 Como rodar este projeto
-1. Clone o repositório.
-2. Certifique-se de ter o [Node.js](https://nodejs.org/) instalado.
-3. Abra a pasta no VS Code e pressione `F5` para iniciar uma janela de teste com a extensão ativa.
+    Comemoração de Commit: O Snoopy dá um "OK" quando detecta que você realizou um commit com sucesso.
 
----
-*Projeto desenvolvido por gabgds para estudos sobre desenvolvimento de extensões e integração de ferramentas.*
+    Reação a Erros: Ele solta uma risadinha se um comando no seu terminal terminar com erro (Exit Code diferente de 0).
+
+    Sincronia Inteligente: As animações possuem transições suaves para garantir que o Snoopy nunca pare de digitar "no meio do caminho".
+
+🛠️ Tecnologias e Conceitos
+
+    VS Code API Avançada:
+
+        WebviewViewProvider com suporte a múltiplas instâncias sincronizadas.
+
+        Integração com a Git API nativa do VS Code para monitorar o estado do HEAD.
+
+        Escuta de eventos de terminal via onDidEndTerminalShellExecution.
+
+    Arquitetura de Mensageria: Sistema de broadcast para enviar comandos para todas as views abertas simultaneamente.
+
+    Automação de Instalação: Script cross-platform para instalação local via links simbólicos.
+
+🚀 Como Rodar e Instalar
+Modo Desenvolvedor (F5)
+
+    Clone o repositório.
+
+    Execute npm install.
+
+    Pressione F5 para abrir a janela de teste (Extension Development Host).
+
+Instalação Fixa (Para uso diário)
+
+Se você quer que o Snoopy fique instalado permanentemente sem precisar do modo debug:
+
+    No terminal da pasta do projeto, execute:
+    Bash
+
+    npm run install-snoopy
+
+    Reinicie o seu VS Code.
+
+    O Snoopy aparecerá automaticamente na sua barra lateral!
+
+Projeto desenvolvido por gabgds para estudos aprofundados sobre integração de ferramentas e UX dentro do ecossistema VS Code.
