@@ -26,6 +26,7 @@ class SnoopyViewProvider {
     {
         const sleepUri = webview.webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'media', 'snoopy-sleeping.gif'));
         const typeUri = webview.webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'media', 'snoopy-typing.gif'));
+        const laughUri = webview.webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'media', 'snoopy-laugh.gif'));
         return `<!DOCTYPE html>
         <html lang="en">
         <head>
@@ -63,6 +64,14 @@ class SnoopyViewProvider {
                                 imgElement.src = '${sleepUri}';
                             }, 2080);
                             break;
+                        case 'error':
+                            imgElement.src = '${laughUri}';
+                            clearTimeout(timer);
+
+                            timer = setTimeout(() => {
+                                imgElement.src = '${sleepUri}';
+                            }, 3000);
+                            break;
                     }
                 });
             </script>    
@@ -90,6 +99,14 @@ function activate (context)
         provider.handleType();
     });
     context.subscriptions.push(disposable);
+    
+    vscode.window.onDidEndTerminalShellExecution(event => {
+        if (event.exitCode !== 0) {
+            if(provider._view) {
+                provider._view.webview.postMessage({ command: 'error'});
+            }
+        }
+    });
 }
 
 function deactivate() {}
