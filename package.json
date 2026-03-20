@@ -32,8 +32,7 @@
   }
   },
   "scripts": {
-    "lint": "eslint .",
-    "pretest": "npm run lint",
+    "install-snoopy": "node scripts/install.js",
     "test": "vscode-test"
   },
   "devDependencies": {
